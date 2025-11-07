@@ -892,10 +892,10 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 <section id="diagnósticos-1" class="slide level2">
 <h2>Diagnósticos</h2>
 <ul>
-<li>Pruebas de hipótesis para la correlación serial:</li>
+<li><p>Pruebas de hipótesis para la correlación serial:</p></li>
+<li><p><span class="alert">El estadístico de Portmanteau:</span> <span class="math display">\[Q_h=T \sum_{j=1}^h tr(\hat{C}'_j\hat{C}^{-1}_0\hat{C}_j\hat{C}^{-1}_0)\]</span> donde <span class="math inline">\(\hat{C}_i=\frac{1}{T}\sum_{j=i+1}^T \hat{w}_t\hat{w}'_{t-i}\)</span>. Para <span class="math inline">\(T\)</span> y <span class="math inline">\(h\)</span> suficientemente grandes, el estadístico se aproxima a la distribución <span class="math inline">\(\chi^2(K^2(h-n^*))\)</span>, donde <span class="math inline">\(n^*\)</span> es la cantidad de parámetros excluyendo los de términos determinísticos.</p></li>
+<li><p><span class="alert">El estadístico de Portmanteau ajustado (muestras pequeñas):</span> <span class="math display">\[Q^*_h=T^2 \sum_{j=1}^h \frac{1}{T-j} tr(\hat{C}'_j\hat{C}^{-1}_0\hat{C}_j\hat{C}^{-1}_0)\]</span></p></li>
 </ul>
-<p><span class="alert">El estadístico de Portmanteau:</span> <span class="math display">\[Q_h=T \sum_{j=1}^h tr(\hat{C}'_j\hat{C}^{-1}_0\hat{C}_j\hat{C}^{-1}_0)\]</span> donde <span class="math inline">\(\hat{C}_i=\frac{1}{T}\sum_{j=i+1}^T \hat{w}_t\hat{w}'_{t-i}\)</span>. Para <span class="math inline">\(T\)</span> y <span class="math inline">\(h\)</span> suficientemente grandes, el estadístico se aproxima a la distribución <span class="math inline">\(\chi^2(K^2(h-n^*))\)</span>, donde <span class="math inline">\(n^*\)</span> es la cantidad de parámetros excluyendo los de términos determinísticos.</p>
-<p><span class="alert">El estadístico de Portmanteau ajustado (muestras pequeñas):</span> <span class="math display">\[Q^*_h=T^2 \sum_{j=1}^h \frac{1}{T-j} tr(\hat{C}'_j\hat{C}^{-1}_0\hat{C}_j\hat{C}^{-1}_0)\]</span></p>
 </section>
 <section id="ejemplo" class="slide level2">
 <h2>Ejemplo</h2>
@@ -946,7 +946,10 @@ I &amp; 0 &amp; ... &amp; 0 &amp; 0 \\
 <ul>
 <li>El modelo ARMAX(p,q) <span class="math inline">\(r\)</span>-dimensionales:</li>
 </ul>
-<p><span class="math display">\[\boldsymbol{X}_{t}=\boldsymbol{\Gamma} \boldsymbol{u}_t+ \sum_{i=1}^p \boldsymbol{\Phi_i}\boldsymbol{X}_{t-i}  - \sum_{j=1}^q \boldsymbol{\Theta_j}\boldsymbol{w}_{t-j} +\boldsymbol{w}_{t}\]</span> con <span class="math inline">\(\boldsymbol{\Phi_p}, \boldsymbol{\Theta_q} \neq \boldsymbol{0}\)</span> y <span class="math inline">\(\Sigma_\boldsymbol{w}\)</span> definida positiva. - Los coeficientes <span class="math inline">\(\boldsymbol{\Phi_i}:i=1,...,p\)</span>, <span class="math inline">\(\boldsymbol{\Theta_j}:j=1,...,q\)</span> son matrices <span class="math inline">\(r \times r\)</span></p>
+<p><span class="math display">\[\boldsymbol{X}_{t}=\boldsymbol{\Gamma} \boldsymbol{u}_t+ \sum_{i=1}^p \boldsymbol{\Phi_i}\boldsymbol{X}_{t-i}  - \sum_{j=1}^q \boldsymbol{\Theta_j}\boldsymbol{w}_{t-j} +\boldsymbol{w}_{t}\]</span> con <span class="math inline">\(\boldsymbol{\Phi_p}, \boldsymbol{\Theta_q} \neq \boldsymbol{0}\)</span> y <span class="math inline">\(\Sigma_\boldsymbol{w}\)</span> definida positiva.</p>
+<ul>
+<li>Los coeficientes <span class="math inline">\(\boldsymbol{\Phi_i}:i=1,...,p\)</span>, <span class="math inline">\(\boldsymbol{\Theta_j}:j=1,...,q\)</span> son matrices <span class="math inline">\(r \times r\)</span></li>
+</ul>
 </section>
 <section id="varmapq" class="slide level2">
 <h2>VARMA(p,q)</h2>
