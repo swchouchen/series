@@ -6,9 +6,9 @@
 <script src="presentacion_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="presentacion_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentacion_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="presentacion_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="presentacion_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <link href="presentacion_files/libs/quarto-contrib/reveal-auto-agenda-0.0.3/reveal-auto-agenda.css" rel="stylesheet"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Shu Wei Chou Chen">
   <title>Tema 3: Técnicas de suavizamiento exponencial</title>
@@ -96,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="presentacion_files/libs/revealjs/dist/theme/quarto-648bbac8bff2f14ab517ece465d6d485.css">
+  <link rel="stylesheet" href="presentacion_files/libs/revealjs/dist/theme/quarto-829c66079de1ba6dba869a367cd4b667.css">
   <link href="presentacion_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="presentacion_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="presentacion_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -197,12 +197,12 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Tema 3: Técnicas de suavizamiento exponencial</h1>
-  <p class="subtitle"><a href="https://shuwei325.github.io/series">Curso: Análisis de series temporales</a></p>
+  <p class="subtitle"><a href="https://swchouchen.github.io/series">Curso: Análisis de series temporales</a></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-<a href="https://shuwei325.github.io">Shu Wei Chou Chen</a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+<a href="https://swchouchen.github.io">Shu Wei Chou Chen</a> <a href="https://orcid.org/0000-0001-5495-2486" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:shuwei.chou@ucr.ac.cr">shuwei.chou@ucr.ac.cr</a>
@@ -220,10 +220,10 @@
 <h2>Paquetes de R</h2>
 <p>Para este tema, se necesita cargar estos paquetes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-2"><a href=""></a><span class="fu">library</span>(forecast)</span>
 <span id="cb1-3"><a href=""></a><span class="fu">library</span>(fpp2)</span>
-<span id="cb1-4"><a href=""></a><span class="fu">library</span>(astsa)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href=""></a><span class="fu">library</span>(astsa)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section>
@@ -470,14 +470,14 @@ P_{t+1}
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>holt1 <span class="ot">&lt;-</span> <span class="fu">holt</span>(y, <span class="at">h=</span><span class="dv">15</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>holt1 <span class="ot">&lt;-</span> <span class="fu">holt</span>(y, <span class="at">h=</span><span class="dv">15</span>)</span>
 <span id="cb2-2"><a href=""></a>holt2 <span class="ot">&lt;-</span> <span class="fu">holt</span>(y, <span class="at">damped=</span><span class="cn">TRUE</span>, <span class="at">phi =</span> <span class="fl">0.9</span>, <span class="at">h=</span><span class="dv">15</span>)</span>
-<span id="cb2-3"><a href=""></a>holt3 <span class="ot">&lt;-</span> <span class="fu">holt</span>(y, <span class="at">damped=</span><span class="cn">TRUE</span>, <span class="at">h=</span><span class="dv">15</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href=""></a>holt3 <span class="ot">&lt;-</span> <span class="fu">holt</span>(y, <span class="at">damped=</span><span class="cn">TRUE</span>, <span class="at">h=</span><span class="dv">15</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>holt2<span class="sc">$</span>model</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>holt2<span class="sc">$</span>model</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Damped Holt's method 
 
@@ -501,7 +501,7 @@ holt(y = y, h = 15, damped = TRUE, phi = 0.9)
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>holt3<span class="sc">$</span>model</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>holt3<span class="sc">$</span>model</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Damped Holt's method 
 
@@ -528,12 +528,12 @@ holt(y = y, h = 15, damped = TRUE)
 <section class="slide level2">
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">autoplot</span>(y) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">autoplot</span>(y) <span class="sc">+</span></span>
 <span id="cb7-2"><a href=""></a>  <span class="fu">autolayer</span>(holt1, <span class="at">series=</span><span class="st">"Holt"</span>, <span class="at">PI=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb7-3"><a href=""></a>  <span class="fu">autolayer</span>(holt3, <span class="at">series=</span><span class="st">"Holt amortiguado"</span>, <span class="at">PI=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb7-4"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Pronóstico usando método Holt y Holt amortiguado"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Año"</span>) <span class="sc">+</span></span>
 <span id="cb7-5"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"Graduados del ITCR (1975-2002)"</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href=""></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">"Pronóstico"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a href=""></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">"Pronóstico"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="presentacion_files/figure-revealjs/unnamed-chunk-7-1.png" width="576" class="r-stretch"></section></section>
@@ -624,7 +624,7 @@ holt(y = y, h = 15, damped = TRUE)
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>ht1 <span class="ot">&lt;-</span> <span class="fu">hw</span>(y,<span class="at">seasonal=</span><span class="st">"multiplicative"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>ht1 <span class="ot">&lt;-</span> <span class="fu">hw</span>(y,<span class="at">seasonal=</span><span class="st">"multiplicative"</span>)</span>
 <span id="cb8-2"><a href=""></a>ht2 <span class="ot">&lt;-</span> <span class="fu">hw</span>(y,<span class="at">seasonal=</span><span class="st">"additive"</span>)</span>
 <span id="cb8-3"><a href=""></a><span class="fu">autoplot</span>(y) <span class="sc">+</span></span>
 <span id="cb8-4"><a href=""></a>  <span class="fu">autolayer</span>(ht1, <span class="at">series=</span><span class="st">"HW multiplicativo"</span>, <span class="at">PI=</span><span class="cn">FALSE</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
@@ -632,7 +632,7 @@ holt(y = y, h = 15, damped = TRUE)
 <span id="cb8-6"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"año"</span>) <span class="sc">+</span></span>
 <span id="cb8-7"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"turistas"</span>) <span class="sc">+</span></span>
 <span id="cb8-8"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Turistas que ingresaron a CR"</span>) <span class="sc">+</span></span>
-<span id="cb8-9"><a href=""></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">"pronóstico"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-9"><a href=""></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">"pronóstico"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -644,14 +644,14 @@ holt(y = y, h = 15, damped = TRUE)
 </div><div class="column" style="width:50%;">
 <p>Comparación de las medidas de precisión.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">accuracy</span>(ht1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">accuracy</span>(ht1)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    ME     RMSE      MAE        MPE     MAPE      MASE
 Training set -114.3084 3239.923 2580.033 -0.3986991 3.995136 0.4245259
                     ACF1
 Training set 0.008128625</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">accuracy</span>(ht2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">accuracy</span>(ht2)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME     RMSE      MAE        MPE     MAPE      MASE
 Training set -394.643 4297.824 3312.546 -0.7003905 5.216058 0.5450557
@@ -668,8 +668,8 @@ Training set -0.003603756</code></pre>
 <p><span class="math display">\[l_t= \alpha \frac{Z_t}{S_{t-s}}+(1-\alpha) (l_{t-1}+\phi~b_{t-1})\]</span> <span class="math display">\[b_t= \beta (l_t-l_{t-1})+(1-\beta)~\phi~ b_{t-1}\]</span> <span class="math display">\[S_t= \gamma \frac{Z_t}{l_{t-1}+\phi~b_{t-1}}+(1-\gamma) S_{t-s}\]</span> <span class="math display">\[P_{t+m}= (l_{t}+(\phi+\phi^2+...+\phi^m)~ b_t) S_{t+m-s}\]</span></p>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>ht3 <span class="ot">&lt;-</span> <span class="fu">hw</span>(y, <span class="at">damped=</span><span class="cn">TRUE</span>, <span class="at">seasonal=</span><span class="st">"multiplicative"</span>)</span>
-<span id="cb13-2"><a href=""></a>ht3<span class="sc">$</span>model</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>ht3 <span class="ot">&lt;-</span> <span class="fu">hw</span>(y, <span class="at">damped=</span><span class="cn">TRUE</span>, <span class="at">seasonal=</span><span class="st">"multiplicative"</span>)</span>
+<span id="cb13-2"><a href=""></a>ht3<span class="sc">$</span>model</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Damped Holt-Winters' multiplicative method 
 
@@ -701,13 +701,13 @@ hw(y = y, seasonal = "multiplicative", damped = TRUE)
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">autoplot</span>(y) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">autoplot</span>(y) <span class="sc">+</span></span>
 <span id="cb15-2"><a href=""></a>  <span class="fu">autolayer</span>(ht1, <span class="at">series=</span><span class="st">"HW M"</span>, <span class="at">PI=</span><span class="cn">FALSE</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb15-3"><a href=""></a>  <span class="fu">autolayer</span>(ht3, <span class="at">series=</span><span class="st">"HW M.amortiguado"</span>, <span class="at">PI=</span><span class="cn">FALSE</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb15-4"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"año"</span>) <span class="sc">+</span></span>
 <span id="cb15-5"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"turistas"</span>) <span class="sc">+</span></span>
 <span id="cb15-6"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Turistas que ingresaron a CR"</span>) <span class="sc">+</span></span>
-<span id="cb15-7"><a href=""></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">"pronóstico"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href=""></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">"pronóstico"</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -718,21 +718,21 @@ hw(y = y, seasonal = "multiplicative", damped = TRUE)
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">accuracy</span>(ht1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">accuracy</span>(ht1)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    ME     RMSE      MAE        MPE     MAPE      MASE
 Training set -114.3084 3239.923 2580.033 -0.3986991 3.995136 0.4245259
                     ACF1
 Training set 0.008128625</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">accuracy</span>(ht2)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">accuracy</span>(ht2)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME     RMSE      MAE        MPE     MAPE      MASE
 Training set -394.643 4297.824 3312.546 -0.7003905 5.216058 0.5450557
                      ACF1
 Training set -0.003603756</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">accuracy</span>(ht3)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">accuracy</span>(ht3)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME     RMSE      MAE       MPE     MAPE      MASE
 Training set 309.2038 3213.097 2587.598 0.2712205 3.958626 0.4257708
@@ -848,14 +848,14 @@ Training set -0.01930739</code></pre>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>turistas<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"turistas.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>turistas<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"turistas.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>)</span>
 <span id="cb22-2"><a href=""></a>y<span class="ot">&lt;-</span><span class="fu">ts</span>(turistas<span class="sc">$</span>turistas,<span class="at">start=</span><span class="fu">c</span>(<span class="dv">1991</span>,<span class="dv">1</span>),<span class="at">frequency=</span><span class="dv">12</span>)</span>
 <span id="cb22-3"><a href=""></a>hw_ad<span class="ot">&lt;-</span><span class="fu">ets</span>(y,<span class="at">model=</span><span class="st">"AAA"</span>,<span class="at">damped =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb22-4"><a href=""></a>hw_ad_a<span class="ot">&lt;-</span><span class="fu">ets</span>(y,<span class="at">model=</span><span class="st">"AAA"</span>,<span class="at">damped =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb22-5"><a href=""></a>hw_mul<span class="ot">&lt;-</span><span class="fu">ets</span>(y,<span class="at">model=</span><span class="st">"MAM"</span>,<span class="at">damped =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb22-6"><a href=""></a>hw_mul_a<span class="ot">&lt;-</span><span class="fu">ets</span>(y,<span class="at">model=</span><span class="st">"MAM"</span>,<span class="at">damped =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb22-7"><a href=""></a>hw_auto<span class="ot">&lt;-</span><span class="fu">ets</span>(y,<span class="at">model=</span><span class="st">"ZZZ"</span>) <span class="co">#selecciona el mejor modelo usando AIC.</span></span>
-<span id="cb22-8"><a href=""></a><span class="fu">plot</span>(hw_auto)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-8"><a href=""></a><span class="fu">plot</span>(hw_auto)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column">
 <div class="cell-output-display">
 <div>
@@ -952,31 +952,31 @@ Z_t &amp;= \ell_{t-1} ( 1+ e_t) \\
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">accuracy</span>(hw_ad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">accuracy</span>(hw_ad)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                    ME     RMSE      MAE        MPE     MAPE      MASE
 Training set -394.6563 4297.824 3312.536 -0.7004108 5.216048 0.5450541
                      ACF1
 Training set -0.003568228</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">accuracy</span>(hw_ad_a)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">accuracy</span>(hw_ad_a)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME    RMSE      MAE       MPE    MAPE     MASE       ACF1
 Training set 260.7423 4254.83 3302.818 0.2544367 5.10127 0.543455 0.00139745</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">accuracy</span>(hw_mul)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">accuracy</span>(hw_mul)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME     RMSE      MAE        MPE     MAPE      MASE
 Training set -296.167 3301.525 2602.353 -0.7057268 3.976193 0.4281986
                    ACF1
 Training set 0.07227753</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">accuracy</span>(hw_mul_a)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">accuracy</span>(hw_mul_a)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME     RMSE      MAE       MPE     MAPE      MASE       ACF1
 Training set 372.8259 3283.797 2633.531 0.3366449 3.939674 0.4333287 0.07885943</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">accuracy</span>(hw_auto)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">accuracy</span>(hw_auto)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   ME     RMSE      MAE       MPE     MAPE      MASE       ACF1
 Training set 372.8259 3283.797 2633.531 0.3366449 3.939674 0.4333287 0.07885943</code></pre>
@@ -984,7 +984,7 @@ Training set 372.8259 3283.797 2633.531 0.3366449 3.939674 0.4333287 0.07885943<
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">summary</span>(hw_auto)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">summary</span>(hw_auto)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>ETS(M,Ad,M) 
 
@@ -1020,7 +1020,7 @@ Training set 372.8259 3283.797 2633.531 0.3366449 3.939674 0.4333287 0.07885943<
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">autoplot</span>(hw_auto)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">autoplot</span>(hw_auto)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -1031,9 +1031,9 @@ Training set 372.8259 3283.797 2633.531 0.3366449 3.939674 0.4333287 0.07885943<
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>hw_auto <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>hw_auto <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb36-2"><a href=""></a>  <span class="fu">autoplot</span>() <span class="sc">+</span></span>
-<span id="cb36-3"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"Turistas"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-3"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"Turistas"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -1386,13 +1386,14 @@ Training set 372.8259 3283.797 2633.531 0.3366449 3.939674 0.4333287 0.07885943<
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy
