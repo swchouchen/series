@@ -1,3 +1,10 @@
+Este repositorio contiene materiales del curso Análisis de Series
+Temporales (XS-0127) del cuarto año del Bachillerato en Estadística, de
+la Escuela de Estadística, Universidad de Costa Rica.
+
+**Responsable del repositorio:** Shu Wei Chou Chen
+(<shuwei.chou@ucr.ac.cr>)
+
 # Descripción
 
 El análisis de series de tiempo es un campo de la estadística que
@@ -9,9 +16,6 @@ pronósticos de este tipo de datos. Además de los fundamentos teóricos,
 los estudiantes realizan aplicaciones usando lenguajes de programación
 estadística y desarrollan un trabajo de investigación que se lleva a
 cabo con una situación real.
-
-**Responsable del repositorio:** Shu Wei Chou Chen
-(<shuwei.chou@ucr.ac.cr>)
 
 # Presentaciones y materiales
 
