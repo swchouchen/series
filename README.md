@@ -1,9 +1,17 @@
 # Descripción
 
-Es un curso introductorio teórico-práctico que proporciona los conceptos
-básicos del análisis de series cronológicas.
+El análisis de series de tiempo es un campo de la estadística que
+estudia la teoría y los métodos que analizan el comportamiento de datos
+dependientes en el tiempo. En este curso se presentan los fundamentos
+del análisis de series de tiempo y los procedimientos para asegurar su
+aplicación correcta, incluyendo los análisis exploratorios, modelación y
+pronósticos de este tipo de datos. Además de los fundamentos teóricos,
+los estudiantes realizan aplicaciones usando lenguajes de programación
+estadística y desarrollan un trabajo de investigación que se lleva a
+cabo con una situación real.
 
-**Profesor:** Shu Wei Chou Chen (<shuwei.chou@ucr.ac.cr>)
+**Responsable del repositorio:** Shu Wei Chou Chen
+(<shuwei.chou@ucr.ac.cr>)
 
 # Presentaciones y materiales
 
