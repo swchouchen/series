@@ -3,7 +3,7 @@ Temporales (XS-0127) del cuarto año del Bachillerato en Estadística, de
 la Escuela de Estadística, Universidad de Costa Rica.
 
 **Responsable del repositorio:** Shu Wei Chou Chen
-(<shuwei.chou@ucr.ac.cr>)
+(<shuwei.chou@ucr.ac.cr>).
 
 # Descripción
 
